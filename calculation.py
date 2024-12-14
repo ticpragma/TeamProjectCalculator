@@ -1,3 +1,4 @@
+import math
 
 class Memory:
 
@@ -15,6 +16,8 @@ def calculate(inp1, inp2, operation):
         return calculate_division(inp1, inp2)
     elif operation == '*':
         return calculate_multiplication(inp1, inp2)
+    elif operation == '**':
+        return calculate_exponentiation(inp1, inp2)
     else:
         return 0
 
@@ -29,3 +32,6 @@ def calculate_division(inp1, inp2):
 
 def calculate_multiplication(inp1, inp2):
     return float(inp1) * float(inp2)
+
+def calculate_exponentiation(inp1, inp2):
+    return math.pow(float(inp1), float(inp2))

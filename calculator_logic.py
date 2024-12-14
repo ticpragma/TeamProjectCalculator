@@ -3,6 +3,7 @@ from kivy.uix.label import Label
 from constants import OPERATIONS
 from calculation import calculate
 from calculation import Memory
+import math
 
 class Calculator(BoxLayout):
     memory = 0
@@ -44,7 +45,7 @@ class Calculator(BoxLayout):
 
     def integer_entered(self, user_input):
         if self.pressed_equal:
-            self.current_input = user_input
+            self.current_input = str(user_input)
             self.reload_answer_field('0')
             self.pressed_equal = False
         else:
@@ -97,8 +98,35 @@ class Calculator(BoxLayout):
         self.reload_input_field()
 
     def MC(self):
-        self.memory = 0
+        self.memory = ''
         self.reload_memory()
+
+    def sin(self):
+        self.current_input = str(math.sin(float(self.current_input)))
+        self.reload_input_field()
+        self.reload_answer_field(self.current_input)
+
+    def cos(self):
+        self.current_input = str(math.cos(float(self.current_input)))
+        self.reload_input_field()
+        self.reload_answer_field(self.current_input)
+
+    def floor(self):
+        self.current_input = str(math.floor(float(self.current_input)))
+        self.reload_input_field()
+        self.reload_answer_field(self.current_input)
+
+    def ceil(self):
+        self.current_input = str(math.ceil(float(self.current_input)))
+        self.reload_input_field()
+        self.reload_answer_field(self.current_input)
+
+    def sqrt(self):
+        self.current_input = str(math.sqrt(float(self.current_input)))
+        self.reload_input_field()
+        self.reload_answer_field(self.current_input)
+
+
 
 
 

@@ -56,11 +56,13 @@
 
             Button:
                 font_size: '20sp'
-                text: 'CE'
+                text: 'floor'
+                on_press: root.floor()
 
             Button:
                 font_size: '20sp'
-                text: 'C'
+                text: 'ceil'
+                on_press: root.ceil()
 
             Button:
                 font_size: '20sp'
@@ -72,15 +74,18 @@
 
             Button:
                 font_size: '20sp'
-                text: '1/X'
+                text: 'sin'
+                on_press: root.sin()
 
             Button:
                 font_size: '20sp'
-                text: 'х²'
+                text: 'х^'
+                on_press: root.input_from_user('**', True)
 
             Button:
                 font_size: '20sp'
                 text: '√'
+                on_press: root.sqrt()
 
             Button:
                 font_size: '20sp'
@@ -161,7 +166,8 @@
 
             Button:
                 font_size: '20sp'
-                text: '+/-'
+                text: 'cos'
+                on_press: root.cos()
 
             Button:
                 font_size: '20sp'
