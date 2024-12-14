@@ -5,11 +5,11 @@ from calculation import calculate
 
 class Calculator(BoxLayout):
     memory = 0
-    result = 0
 
-    last_operation = None
-    last_integer = ''
-    last_input = {'is_operation': False, 'value': ''}
+    last_input = ''
+    current_input = ''
+    operation = ''
+    pressed_equal = False
 
     def input_from_user(self, user_input, is_operation=False):
         if bool(is_operation):
@@ -19,31 +19,63 @@ class Calculator(BoxLayout):
 
 
     def operation_entered(self, user_input):
-        self.last_operation = user_input
 
-    def integer_entered(self, user_input):
-        if not self.last_input['is_operation']:
-            self.last_input['value'] = user_input
-            self.last_input['is_operation'] = False
-            self.last_integer = self.last_integer + user_input
+        if self.last_input == '' and self.current_input == '':
+            return
+
+        elif self.last_input == '' and self.current_input != '':
+            self.last_input = self.current_input
+            self.current_input = ''
+            self.operation = user_input
             self.reload_input_field()
 
-
+        elif self.last_input != '' and self.current_input != '':
+            self.last_input = calculate(self.last_input, self.current_input, self.operation)
+            self.current_input = ''
+            self.reload_input_field()
+            self.reload_answer_field(self.last_input)
+            self.operation = user_input
+        elif self.last_input != '' and self.current_input == '':
+            self.operation = user_input
         else:
-            result = calculate()
+            return
+
+
+    def integer_entered(self, user_input):
+        if self.pressed_equal:
+            self.current_input = user_input
+            self.reload_answer_field('0')
+            self.pressed_equal = False
+        else:
+            self.current_input = self.current_input + user_input
+
+        self.reload_input_field()
+
 
     def reload_input_field(self):
-        if self.last_integer == '':
+        if self.current_input == '':
             self.ids['result_field'].text = '0'
             return
 
-        self.ids['result_field'].text = self.last_integer
+        self.ids['result_field'].text = str(self.current_input)
+
+    def reload_answer_field(self, value):
+        self.ids['answer_field'].text = str(value)
 
     def delete(self):
-        if len(self.last_integer) > 0:
-            self.last_integer = self.last_integer[0:len(self.last_integer) - 1]
+        if len(self.current_input) > 0:
+            self.current_input = self.current_input[0:len(self.current_input) - 1]
             self.reload_input_field()
 
+
+    def equal_input(self):
+        if self.current_input != '' and self.last_input != '':
+            self.current_input = calculate(self.last_input, self.current_input, self.operation)
+            self.operation = ''
+            self.last_input = ''
+            self.reload_input_field()
+            self.reload_answer_field(self.current_input)
+            self.pressed_equal = True
 
     def test_func(self):
         lbl = Label(text='test', size_hint_y=None, height=40)
