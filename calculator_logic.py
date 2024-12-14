@@ -2,6 +2,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from constants import OPERATIONS
 from calculation import calculate
+from calculation import Memory
 
 class Calculator(BoxLayout):
     memory = 0
@@ -62,6 +63,10 @@ class Calculator(BoxLayout):
     def reload_answer_field(self, value):
         self.ids['answer_field'].text = str(value)
 
+    def reload_memory(self):
+        self.ids['memory_cash'].text = str(self.memory)
+
+
     def delete(self):
         if len(self.current_input) > 0:
             self.current_input = self.current_input[0:len(self.current_input) - 1]
@@ -76,6 +81,26 @@ class Calculator(BoxLayout):
             self.reload_input_field()
             self.reload_answer_field(self.current_input)
             self.pressed_equal = True
+
+    def M_plus(self):
+        if self.current_input != '':
+            self.memory = str(float(self.memory) + float(self.current_input))
+            self.reload_memory()
+
+    def M_minus(self):
+        if self.current_input != '':
+            self.memory = str(float(self.memory) - float(self.current_input))
+            self.reload_memory()
+
+    def MR(self):
+        self.current_input = str(self.memory)
+        self.reload_input_field()
+
+    def MC(self):
+        self.memory = 0
+        self.reload_memory()
+
+
 
     def test_func(self):
         lbl = Label(text='test', size_hint_y=None, height=40)

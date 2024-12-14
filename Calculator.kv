@@ -28,22 +28,23 @@
             Button:
                 font_size: '20sp'
                 text: 'MC'
+                on_press: root.MC()
 
             Button:
                 font_size: '20sp'
                 text: 'MR'
+                on_press: root.MR()
 
             Button:
                 font_size: '20sp'
                 text: 'M+'
+                on_press: root.M_plus()
 
             Button:
                 font_size: '20sp'
                 text: 'M-'
+                on_press: root.M_minus()
 
-            Button:
-                font_size: '20sp'
-                text: 'MS'
 
 
         BoxLayout:
@@ -224,14 +225,18 @@
                         size_hint_y: None
                         height: self.minimum_height
 
-            BoxLayout:
-                pos_hint: {'right': 1, 'top': 1}
-                id: memory
-                orientation: "horizontal"
+                        Label:
+                            text: 'Label 3'
+                            size_hint_y: None
+                            height: 40
 
-                Button:
-                    size_hint: (0.8, None)
-                    text: '2'
-                    on_press: root.test_func()
+
+            BoxLayout
+                orientation: 'vertical'
+                pos_hint: {'right': 1, 'y': 0}
+                id: memory
+                Label:
+                    id: memory_cash
+                    text: ''
 
 

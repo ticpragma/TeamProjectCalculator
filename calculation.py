@@ -1,4 +1,11 @@
 
+class Memory:
+
+    memory_cash = []
+
+
+
+
 def calculate(inp1, inp2, operation):
     if operation == '+':
         return calculate_addition(inp1, inp2)
