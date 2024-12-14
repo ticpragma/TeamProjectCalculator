@@ -76,7 +76,7 @@ class Calculator(BoxLayout):
 
     def equal_input(self):
         if self.current_input != '' and self.last_input != '':
-            self.current_input = calculate(self.last_input, self.current_input, self.operation)
+            self.current_input = str(calculate(self.last_input, self.current_input, self.operation))
             self.operation = ''
             self.last_input = ''
             self.reload_input_field()
